@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: email-notification-service
+  mail:
+    host: smtp.yandex.ru
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    port: 465
+    protocol: smtps
+
+mail:
+  debug: true
