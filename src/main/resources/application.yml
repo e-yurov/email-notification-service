@@ -10,6 +10,32 @@ spring:
     password: ${MAIL_PASSWORD}
     port: 465
     protocol: smtps
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      properties:
+        spring.json.add.type.headers: false
+        spring:
+          deserializer:
+            key:
+              delegate:
+                class: org.apache.kafka.common.serialization.StringDeserializer
+            value:
+              delegate:
+                class: org.springframework.kafka.support.serializer.JsonDeserializer
+          json:
+            trusted:
+              packages: '*'
+      group-id: "workplace-reservation"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    properties:
+      spring.json.value.default.type: com.rc.mentorship.emailnotification.dto.ReservationMessage
 
 mail:
   debug: true
+
+kafka:
+  topic: email_topic
+  group-id: ${spring.kafka.consumer.group-id}

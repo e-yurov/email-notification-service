@@ -14,6 +14,6 @@ public class MailController {
 
     @PostMapping("/send")
     public void send() {
-        mailSendingService.send();
+        mailSendingService.send(null);
     }
 }
